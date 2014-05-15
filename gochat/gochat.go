@@ -174,6 +174,11 @@ func handleChat(c appengine.Context, m *xmpp.Message) {
 
 	command := strings.HasPrefix(m.Body, "/")
 
+	if (strings.Contains(m.Body, "OTR:") ||
+		strings.Contains(m.Body, "OTR?")) {
+		return;
+	}
+
 	found := false
 	for _, user := range users {
 		if user.JID == sender {
